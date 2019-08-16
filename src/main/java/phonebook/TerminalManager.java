@@ -1,6 +1,7 @@
 package phonebook;
 
 import java.util.ArrayList;
+import java.util.NoSuchElementException;
 import java.util.Scanner;
 
 final class TerminalManager {
@@ -26,13 +27,15 @@ final class TerminalManager {
 
         if (name.equals("exit")) System.exit(0);
 
-        if (!phoneBook.ifPersonExist(name)) {
+        ArrayList<String> phones;
+
+        try {
+            phones = phoneBook.getPhones(name);
+        } catch (NoSuchElementException e) {
             System.out.println("These is no such person in the phone book");
             getName();
             return;
         }
-
-        final var phones = phoneBook.getPhones(name);
 
         if (phones.size() != 0) {
             printPhones(name, phones);

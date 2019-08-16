@@ -2,6 +2,7 @@ package phonebook;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.NoSuchElementException;
 
 final class PhoneBook {
     private final HashMap<String, ArrayList<String>> phoneBook = new HashMap<>();
@@ -17,14 +18,14 @@ final class PhoneBook {
 
     ArrayList<String> getPhones(final String name) {
 
-        if (phoneBook.get(name) != null) {
-            return phoneBook.get(name);
+        if (phoneBook.containsKey(name)) {
+            if (phoneBook.get(name) != null) {
+                return phoneBook.get(name);
+            } else {
+                return new ArrayList<>();
+            }
         }
 
-        return new ArrayList<>();
-    }
-
-    boolean ifPersonExist(final String name) {
-        return phoneBook.containsKey(name);
+        throw new NoSuchElementException();
     }
 }

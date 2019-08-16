@@ -1,12 +1,13 @@
 package phonebook;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 
-class TerminalProvider {
+final class TerminalManager {
 
     private final PhoneBook phoneBook;
 
-    TerminalProvider(final PhoneBook phoneBook) {
+    TerminalManager(final PhoneBook phoneBook) {
         this.phoneBook = phoneBook;
     }
 
@@ -33,7 +34,7 @@ class TerminalProvider {
 
         final var phones = phoneBook.getPhones(name);
 
-        if (phones.length != 0) {
+        if (phones.size() != 0) {
             printPhones(name, phones);
         } else {
             System.out.println("There is no phones for " + name + ":\n");
@@ -41,11 +42,11 @@ class TerminalProvider {
         }
     }
 
-    private void printPhones(final String name, final String[] phones) {
+    private void printPhones(final String name, final ArrayList<String> phones) {
         System.out.println("\nPhone numbers of " + name + ":\n");
 
-        for (int i = 0; i < phones.length; i++) {
-            System.out.println(i + 1 + ". " + phones[i]);
+        for (int i = 0; i < phones.size(); i++) {
+            System.out.println(i + 1 + ". " + phones.get(i));
         }
     }
 }

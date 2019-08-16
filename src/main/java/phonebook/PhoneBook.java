@@ -1,28 +1,27 @@
 package phonebook;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
 
 final class PhoneBook {
-    private HashMap<String, ArrayList<String>> phoneBook = new HashMap<>();
+    private final HashMap<String, ArrayList<String>> phoneBook = new HashMap<>();
 
-    void addPerson(final String name, final String... phones) {
+    void addPerson(final String name, final ArrayList<String> phones) {
 
         if (phoneBook.containsKey(name)) {
-           phoneBook.get(name).addAll(Arrays.asList(phones));
+           phoneBook.get(name).addAll(phones);
         } else {
-            phoneBook.put(name, new ArrayList<>(Arrays.asList(phones)));
+            phoneBook.put(name, new ArrayList<>(phones));
         }
     }
 
-    String[] getPhones(final String name) {
+    ArrayList<String> getPhones(final String name) {
 
         if (phoneBook.get(name) != null) {
-            return phoneBook.get(name).toArray(new String[0]);
+            return phoneBook.get(name);
         }
 
-        return new String[0];
+        return new ArrayList<>();
     }
 
     boolean ifPersonExist(final String name) {
